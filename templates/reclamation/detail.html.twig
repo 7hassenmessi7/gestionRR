@@ -1,0 +1,19 @@
+{% extends 'template.html.twig' %}
+
+{% block body %}
+
+
+ {{dump(reclamation)}}
+ <div class="alert alert-success" role="alert">
+    {{reclamation.contact}} {{reclamation.description}}
+    {{reclamation.destinataire}} {{reclamation.type}}
+    {{reclamation.status}}  {{reclamation.createdAt|date('d-m-Y')}}
+  </div>
+
+
+{% endblock %}
+
+{% block title %}
+
+
+{% endblock %}
