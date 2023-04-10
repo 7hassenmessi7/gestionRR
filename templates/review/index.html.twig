@@ -3,19 +3,24 @@
 {% block title %}Hello ReviewController!{% endblock %}
 
 {% block body %}
-{% for i in reviews %}
-<div class="products-content">
-<span class="category">T-Shirt</span>
-<h3>{{i.comment}}</h3>
-<div class="star-rating">
-<i class='bx bxs-star'></i>
-<i class='bx bxs-star'></i>
-<i class='bx bxs-star'></i>
-<i class='bx bxs-star'></i>
-<i class='bx bxs-star'></i>
-</div>
-<a href="#" class="add-to-cart">Add to Cart</a>
-</div>
-<hr>
+
+{% for review in reviews %}
+    <div class="review">
+        <h3>{{review.comment}}</h3>
+        <div class="rating">
+            {% for i in 1..review.rate %}
+                <span class="star">&#9733;</span>
+            {% endfor %}
+            {% for i in review.rate+1..5 %}
+                <span class="star">&#9734;</span>
+            {% endfor %}
+        </div>
+    </div>
+    <a class="btn btn-sm btn-info" href="{{path ('ajouter.review', {id:review.id}) }}">update</a>
+	<a class="btn btn-sm btn-danger" href="{{path ('delete.review', {id:review.id}) }}">delete</a></td>
+     <hr>
 {% endfor %}
+
+
+
 {% endblock %}

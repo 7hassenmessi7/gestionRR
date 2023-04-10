@@ -1,0 +1,57 @@
+/* public/css/star-rating.css */
+
+.rating-field {
+    display: none;
+}
+
+.rating-stars {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    color: #ccc;
+    width: 125px;
+    text-shadow: 1px 1px #aaa;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.rating-stars > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: #ffcc00;
+    overflow: hidden;
+}
+
+.rating-stars > span:before {
+    content: "\2605\2605\2605\2605\2605";
+}
+
+.rating-stars > span:after {
+    content: "\2605\2605\2605\2605\2605";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: #ffcc00;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.rating-stars:hover > span:after,
+.rating-stars:hover > span:hover ~ span:after {
+    display: none;
+}
+
+.rating-stars:hover > span:hover:before,
+.rating-stars:hover > span:hover ~ span:before {
+    content: "\2605\2605\2605\2605\2605";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: #ffcc00;
+    overflow: hidden;
+    z-index: 1;
+}

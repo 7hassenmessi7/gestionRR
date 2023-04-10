@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ReclamationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
@@ -13,7 +15,9 @@ class Reclamation
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+     /**
+     * @Assert\NotBlank(message="remplir ce champ")
+    */
     #[ORM\Column(length: 50)]
     private ?string $contact = null;
 

@@ -1,13 +1,17 @@
 {% extends 'template.html.twig' %}
-
 {% block body %}
-
-
- {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
-
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.rate) }}
+        {{ form_widget(form.rate, {'attr': {'class': 'rating-field'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.comment) }}
+        {{ form_widget(form.comment) }}
+    </div>
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
 {% endblock %}
-
 {% block title %}
-
 
 {% endblock %}

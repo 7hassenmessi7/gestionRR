@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
 class Review
@@ -14,13 +16,15 @@ class Review
     private ?int $id = null;
 
     #[ORM\Column]
+    /**
+     * @Assert\Range(min=1 , max=5)
+    */
     private ?int $rate = null;
 
     #[ORM\Column(length: 255)]
     private ?string $comment = null;
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Article $article = null;
 
     public function getId(): ?int

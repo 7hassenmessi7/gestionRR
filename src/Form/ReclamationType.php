@@ -17,9 +17,9 @@ class ReclamationType extends AbstractType
             ->add('contact')
             ->add('destinataire', ChoiceType::class, [
                 'choices' => [
-                    'Apple' => 1,
-                    'Banana' => 2,
-                    'Durian' => 3,
+                    'Service client' => 'Service client',
+                    'Service technique' => 'Service technique',
+                    'Service commercial' => 'Service commercial',
                 ],
                 'choice_attr' => [
                     'Apple' => ['data-color' => 'Red'],
@@ -29,9 +29,10 @@ class ReclamationType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'Apple' => 1,
-                    'Banana' => 2,
-                    'Durian' => 3,
+                    'Réclamation' => 'Réclamation',
+                    'Demande de renseignement' => 'Demande de renseignement',
+                    'Demande de service' => 'Demande de service',
+                    'Problème' => 'Problème',
                 ],
                 'choice_attr' => [
                     'Apple' => ['data-color' => 'Red'],
@@ -41,9 +42,10 @@ class ReclamationType extends AbstractType
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    'Apple' => 1,
-                    'Banana' => 2,
-                    'Durian' => 3,
+                    'Nouvelle' => 'Nouvelle',
+                    'En cours' => 'En cours',
+                    'Terminée' => 'Terminée',
+                    'Cloturée' => 'Cloturée',
                 ],
                 'choice_attr' => [
                     'Apple' => ['data-color' => 'Red'],
