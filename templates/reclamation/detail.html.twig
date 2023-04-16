@@ -1,11 +1,15 @@
-{% extends 'template.html.twig' %}
+{% extends 'base_front.html.twig' %}
 
 {% block body %}
 
 
- {{dump(reclamation)}}
+ 
  <div class="alert alert-success" role="alert">
-    {{reclamation.contact}} {{reclamation.description}}
+    {% if reclamation.user is not null %}
+       							    
+         							    <td>{{ reclamation.user.email }}</td>
+										
+       								 {% endif %} {{reclamation.description}}
     {{reclamation.destinataire}} {{reclamation.type}}
     {{reclamation.status}}  {{reclamation.createdAt|date('d-m-Y')}}
   </div>

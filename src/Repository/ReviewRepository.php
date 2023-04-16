@@ -39,6 +39,14 @@ class ReviewRepository extends ServiceEntityRepository
         }
     }
 
+    public function getAverageRating(): float
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('AVG(r.rate) as average_rating');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return Review[] Returns an array of Review objects
 //     */

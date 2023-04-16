@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
 {
@@ -15,11 +16,9 @@ class Reclamation
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-     /**
-     * @Assert\NotBlank(message="remplir ce champ")
-    */
-    #[ORM\Column(length: 50)]
-    private ?string $contact = null;
+     
+    
+   
 
     #[ORM\Column(length: 50)]
     private ?string $type = null;
@@ -29,10 +28,17 @@ class Reclamation
 
     #[ORM\Column(length: 50)]
     private ?string $status = null;
-
+     
+    #[Assert\Length(
+        min: 20,
+        max: 100,
+        minMessage: 'Votre description doit comporter au moins {{ limit }} caractères',
+        maxMessage: 'Votre description ne peut pas dépasser {{ limit }} caractères',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $description = null;
-
+     
+   
     #[ORM\ManyToOne(inversedBy: 'reclamations')]
     private ?User $user = null;
 
@@ -52,17 +58,8 @@ class Reclamation
         return $this->id;
     }
 
-    public function getContact(): ?string
-    {
-        return $this->contact;
-    }
+   
 
-    public function setContact(string $contact): self
-    {
-        $this->contact = $contact;
-
-        return $this;
-    }
 
     public function getType(): ?string
     {
@@ -135,4 +132,21 @@ class Reclamation
 
         return $this;
     }
+
+
+    public function hasBadWord(): bool
+    {
+        // Define an array of bad words
+        $badWords = ['badword1 hahc azjczajnd qdhqncq zfnioncqs azdjnjzq c', 'badword2', 'badword3'];
+        
+        // Check if the description contains any of the bad words
+        foreach ($badWords as $badWord) {
+            if (stripos($this->getDescription(), $badWord) !== false) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
 }

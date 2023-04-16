@@ -91,8 +91,9 @@ class User
 
     public function __ToString(): string
     {
-        $this->name;
+       
         $this->email;
+        $this->name;
         
         return $this;
 

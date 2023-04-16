@@ -20,9 +20,11 @@ class ReviewController extends AbstractController
     {
 
         $reviews=$repo->findAll(); 
+        $averageRating = $repo->getAverageRating();
            
         return $this->render('review/index.html.twig', [
             'reviews' => $reviews,
+            'average_rating' => $averageRating,
         ]);
     }
     //Ajouter Review

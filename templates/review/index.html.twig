@@ -1,4 +1,4 @@
-{% extends 'template.html.twig' %}
+{% extends 'base_front.html.twig' %}
 
 {% block title %}Hello ReviewController!{% endblock %}
 
@@ -8,18 +8,42 @@
     <div class="review">
         <h3>{{review.comment}}</h3>
         <div class="rating">
-            {% for i in 1..review.rate %}
-                <span class="star">&#9733;</span>
-            {% endfor %}
-            {% for i in review.rate+1..5 %}
-                <span class="star">&#9734;</span>
-            {% endfor %}
-        </div>
+    {% for i in 1..5 %}
+        {% if i <= review.rate %}
+            <span class="star filled">&#9733;</span>
+        {% else %}
+            <span class="star empty">&#9734;</span>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<style>
+    .star {
+        color: yellow;
+    }
+    .filled {
+        color: yellow;
+    }
+    .empty {
+        color: lightgray;
+    }
+</style>
+
     </div>
     <a class="btn btn-sm btn-info" href="{{path ('ajouter.review', {id:review.id}) }}">update</a>
 	<a class="btn btn-sm btn-danger" href="{{path ('delete.review', {id:review.id}) }}">delete</a></td>
      <hr>
 {% endfor %}
+The average rating is {{ average_rating }}
+
+    {% if (average_rating ) < 2 %}
+        bad
+    {% elseif  (average_rating) >= 2 and (average_rating) < 4 %}
+        good
+    {% else %}
+        excellent
+    {% endif %}
+
 
 
 
