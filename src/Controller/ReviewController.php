@@ -92,4 +92,38 @@ class ReviewController extends AbstractController
         }
         return $this->redirectToRoute('list.review');
     }
+
+  
+    #[Route('/reviews/{id}/like',name:'review_like')]
+    public function like(Review $review,ManagerRegistry $Doctrine)
+    {
+        // get the entity manager
+        $entityManager = $Doctrine->getManager();
+
+        // increase the like count
+        $review->setLikes($review->getLikes() + 1);
+
+        // save the changes to the database
+        $entityManager->persist($review);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('list.review', ['id' => $review->getId()]);
+    }
+
+   
+    #[Route('/reviews/{id}/dislike',name:'review_dislike')]
+    public function dislike(Review $review ,ManagerRegistry $Doctrine)
+    {
+        // get the entity manager
+        $entityManager = $Doctrine->getManager();
+
+        // increase the dislike count
+        $review->setDislikes($review->getDislikes() + 1);
+
+        // save the changes to the database
+        $entityManager->persist($review);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('list.review', ['id' => $review->getId()]);
+    }
 }

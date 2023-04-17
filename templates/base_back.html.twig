@@ -61,6 +61,7 @@
 
 			<!-- App css -->
 			<link rel="stylesheet" type="text/css" href="{{asset('assets_back/css/style.css')}}">
+			<link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
 		{% endblock %}
 	</head>
 
@@ -264,6 +265,7 @@
 
 			<!-- index body start -->
 			<div class="page-body"> {% block body %}
+			
             
             
             {% endblock %}
@@ -340,6 +342,7 @@
 	<script src="{{asset('assets_back/js/chart/apex-chart/apex-chart.js')}}"></script>
 	<script src="{{asset('assets_back/js/chart/apex-chart/stock-prices.js')}}"></script>
 	<script src="{{asset('assets_back/js/chart/apex-chart/chart-custom1.js')}}"></script>
+	<script src="{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.min.js') }}"></script>
 
 
 	<!-- slick slider js -->

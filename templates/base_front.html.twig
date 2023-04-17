@@ -20,6 +20,8 @@
 			<link rel="stylesheet" href="{{asset('assets_front/css/dark.css')}}"/>
 			<link rel="stylesheet" href="{{asset('assets_front/css/responsive.css')}}"/>
 			<link rel="stylesheet" href="{{asset('assets_front/css/profile_pic.css')}}"/>
+			<link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
+
 
 			<title>Ebadel</title>
 			<link rel="icon" type="image/png" href="{{asset('assets_front/img/favicon.png')}}"/>
@@ -86,7 +88,12 @@
 			</nav>
 		</div>
 	</div>
-	{% block body %}{% endblock %}
+	{% block body %}
+
+
+	
+	
+	{% endblock %}
 	{% block footer %}
 		<div class="footer-area">
 			<div class="container">
@@ -262,6 +269,8 @@
 		<script src="{{asset('assets_front/js/ajaxchimp.min.js')}}"></script>
 		<script src="{{asset('assets_front/js/main.js')}}"></script>
 		<script src="{{asset('assets_front/js/profile_pic.js')}}"></script>
+		<script src="{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.min.js') }}"></script>
+
 	{% endblock %}
 	<!-- Mirrored from templates.hibootstrap.com/xton/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Mar 2023 23:18:33 GMT -->
 </html></html>

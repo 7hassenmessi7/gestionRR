@@ -32,6 +32,13 @@
     </div>
     <a class="btn btn-sm btn-info" href="{{path ('ajouter.review', {id:review.id}) }}">update</a>
 	<a class="btn btn-sm btn-danger" href="{{path ('delete.review', {id:review.id}) }}">delete</a></td>
+
+
+    <p>Likes: {{ review.likes }}</p>
+    <p>Dislikes: {{ review.dislikes }}</p>
+
+    <a href="{{ path('review_like', {'id': review.id}) }}">Like</a>
+    <a href="{{ path('review_dislike', {'id': review.id}) }}">Dislike</a>
      <hr>
 {% endfor %}
 The average rating is {{ average_rating }}

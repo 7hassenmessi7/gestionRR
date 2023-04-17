@@ -24,9 +24,11 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reclamation::class)]
     private Collection $reclamations;
 
+   
     public function __construct()
     {
         $this->reclamations = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -98,4 +100,9 @@ class User
         return $this;
 
     }
+
+   
+   
+
+   
 }

@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Controller\ReclamationController;
 
 use App\Repository\ReviewRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,6 +38,14 @@ class Review
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     private ?Article $article = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $likes = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $dislikes = null;
+
+   
 
     public function getId(): ?int
     {
@@ -137,4 +147,43 @@ class Review
             return 'Excellent product';
         }
     }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(?int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getDislikes(): ?int
+    {
+        return $this->dislikes;
+    }
+
+    public function setDislikes(?int $dislikes): self
+    {
+        $this->dislikes = $dislikes;
+
+        return $this;
+    }
+
+    public function like()
+    {
+        $this->likes++;
+    }
+
+    public function dislike()
+    {
+        $this->dislikes++;
+    }
+
+   
+
+   
+
 }
