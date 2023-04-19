@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReclamationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -46,9 +48,16 @@ class Reclamation
     //@Gedmo\Timestampable(no="create)
     private $createdAt;
 
+    #[ORM\Column]
+    private ?bool $treated = false;
+
+    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Response::class)]
+    private Collection $responses;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->responses = new ArrayCollection();
         
     }
 
@@ -147,6 +156,48 @@ class Reclamation
         }
         
         return false;
+    }
+
+    public function isTreated(): ?bool
+    {
+        return $this->treated;
+    }
+
+    public function setTreated(bool $treated): self
+    {
+        $this->treated = $treated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Response>
+     */
+    public function getResponses(): Collection
+    {
+        return $this->responses;
+    }
+
+    public function addResponse(Response $response): self
+    {
+        if (!$this->responses->contains($response)) {
+            $this->responses->add($response);
+            $response->setReclamation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(Response $response): self
+    {
+        if ($this->responses->removeElement($response)) {
+            // set the owning side to null (unless already changed)
+            if ($response->getReclamation() === $this) {
+                $response->setReclamation(null);
+            }
+        }
+
+        return $this;
     }
     
 }

@@ -36,15 +36,22 @@
        								 {% endif %}
 									<td>{{rec.destinataire}}</td>
 									<td>{{rec.Type}}</td>
+								
 									<td>{{rec.status}}</td>
                                     <td>{{rec.description}}</td>
+									 
+									<td>{{ rec.treated ? 'Traité' : 'En cours' }}</td>
+    							    <td>
+          							<a href="{{ path('reclamation_traiter', {id: rec.id}) }}">Traiter</a> |
+           							<a href="{{ path('reclamation_untraiter', {id: rec.id}) }}">Marquer en cours</a>
+        							</td>
 									
                 	            
                                     <td>{{rec.createdAt |date('d-m-Y')}}</td>
 									<td><a class="btn btn-sm btn-info" href="{{ path ('reclamation.detail', {id: rec.id}) }}">detail</a></td>
 									
 					                <td><a class="btn btn-sm btn-danger" href="{{path ('delete.reclamation', {id:rec.id}) }}">delete</a></td>
-									<td><a class="btn btn-sm btn-info" href="#" >Reponse</a></td>
+									<td><a class="btn btn-sm btn-info" href="{{path ('ajouter.response', {id:rec.id}) }}" >Reponse</a></td>
 								</tr>
 
 								{% endfor %}

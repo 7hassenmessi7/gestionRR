@@ -277,9 +277,43 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('listes.reclamations');
     }
 
+
+    /**
+     * @Route("/reclamation/{id}/traiter", name="reclamation_traiter")
+     */
+
+     #[Route('/{id}/traiter',name:'reclamation_traiter')]
+    public function traiterReclamation(Reclamation $reclamation , ManagerRegistry $Doctrine): Response
+    {
+        $reclamation->setTreated(true);
+        
+        $entityManager=$Doctrine->getManager();
+        $entityManager->persist($reclamation);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('listes.reclamations', ['id' => $reclamation->getId()]);
+    }
+
+
+    #[Route('/{id}/untraiter',name:'reclamation_untraiter')]
+
+    public function enCoursReclamation(Reclamation $reclamation, ManagerRegistry $Doctrine): Response
+    {
+        $reclamation->setTreated(false);
+        
+        $entityManager=$Doctrine->getManager();
+        $entityManager->persist($reclamation);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('listes.reclamations', ['id' => $reclamation->getId()]);
+    }
+
+
+
+
  
 
-    }
+ }
 
 
 

@@ -52,6 +52,15 @@ class ReclamationRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByReclamation($reclamation)
+{
+    return $this->createQueryBuilder('r')
+        ->andWhere('r.reclamation = :reclamation')
+        ->setParameter('reclamation', $reclamation)
+        ->getQuery()
+        ->getResult();
+}
+
 //    public function findOneBySomeField($value): ?Reclamation
 //    {
 //        return $this->createQueryBuilder('r')
