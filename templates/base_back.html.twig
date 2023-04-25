@@ -65,6 +65,7 @@
 			<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 		{% endblock %}
 	</head>
+	<body>
 
 
 	<!-- tap on top start -->
@@ -244,7 +245,7 @@
                                         <span>Boutique</span>
                                     <div class="according-menu"><i class="ri-arrow-down-s-line"></i></div></a>
 
-									 <a class="linear-icon-link sidebar-link sidebar-title active" href="{{ path ('list.reclamations')}}">
+									 <a class="linear-icon-link sidebar-link sidebar-title active" href="{{ path ('listes.reclamations')}}">
                                         <i class="ri-store-3-line"></i>
                                         <span>Reclamation</span>
                                     </a>
@@ -265,7 +266,26 @@
 			<!-- Page Sidebar Ends-->
 
 			<!-- index body start -->
-			<div class="page-body"> {% block body %}
+			<div class="page-body"> 
+			
+			{% for message in app.session.flashBag.get('info') %}
+           <div class="alert alert-info" role="alert">
+                 {{message}}
+             </div>
+     {% endfor %}
+     {% for message in app.session.flashBag.get('success') %}
+             <div class="alert alert-success" role="alert">
+                 {{message}}
+             </div>
+     {% endfor %}
+    {% for message in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+         </div>
+    {% endfor %}
+
+			
+			{% block body %}
 			
             
             
@@ -275,9 +295,8 @@
 
 			</div>
 			<!-- Page Body End -->
-		</html>
-	</html>
-</div>
+		
+	
 <!-- page-wrapper End-->
 
 <!-- Modal Start -->
@@ -363,4 +382,5 @@
 	<!-- Theme js -->
 	<script src="{{asset('assets_back/js/script.js')}}"></script>
 {% endblock %}
+</body>
 <!-- Mirrored from themes.pixelstrap.com/fastkart/back-end/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Mar 2023 21:03:09 GMT --></html>

@@ -3,12 +3,7 @@
 
 {% block body %}
 
-{{ form_start(filterForm) }}
-        {{ form_row(filterForm.destinataire, {'label': false}) }}
-        
-        
-    {{ form_end(filterForm) }}
-  
+
 <div class="row">
 					<div class="col-md">
 						<div class="card card-body">
@@ -17,13 +12,14 @@
 									<th>contact</th>
 									<th>destinataire</th>
 									<th>Type</th>
-									<th>Status</th>
+									
     							    <th>description</th>
 								
 									<th>createdAt</th>
-									<th>detail</th>
+									
 									<th>update</th>
 									<th>delete</th>
+									<th>responses</th>
 									
 									
 								</tr>
@@ -36,14 +32,15 @@
        								 {% endif %}
 									<td>{{rec.destinataire}}</td>
 									<td>{{rec.Type}}</td>
-									<td>{{rec.status}}</td>
+									
                                     <td>{{rec.description}}</td>
 									
                 	            
-                                    <td>{{rec.createdAt |date('d-m-Y')}}</td>
-									<td><a class="btn btn-sm btn-info" href="{{ path ('reclamation.detail', {id: rec.id}) }}">detail</a></td>
+                                    <td>{{rec.createdAt |date('Y-m-d H:i:s')}}</td>
+									
 									<td><a class="btn btn-sm btn-info" href="{{path ('ajouter.reclamation', {id:rec.id}) }}">update</a></td>
 					                <td><a class="btn btn-sm btn-danger" href="{{path ('delete.reclamation', {id:rec.id}) }}">delete</a></td>
+									 <td><a class="btn btn-sm btn-info" href="{{path ('list.responses', {'idreclamation': rec.id}) }}">responses</a></td>
 									
 								</tr>
 

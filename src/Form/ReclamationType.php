@@ -39,15 +39,7 @@ class ReclamationType extends AbstractType
                 ],
                 
             ])
-            ->add('status', ChoiceType::class, [
-                'choices' => [
-                    'Nouvelle' => 'Nouvelle',
-                    'En cours' => 'En cours',
-                    'Terminée' => 'Terminée',
-                    'Cloturée' => 'Cloturée',
-                ],
-                
-            ])
+          
             ->add('description')
             ->add('createdAt')
            

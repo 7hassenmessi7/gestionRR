@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
 use DateInterval;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('reclamation')]
 class ReclamationController extends AbstractController
@@ -78,15 +81,13 @@ class ReclamationController extends AbstractController
 
 
     //pdf
-    #[Route('/pdf/{id}',name:'reclamation.pdf')]
-    public function generatePdfReclamation(Reclamation $reclamation = null,PdfService $pdf){
-
-        $html =$this->render('reclamation/detail.html.twig',[
-            'reclamation'=>$reclamation
-        ]);
+    #[Route('/pdf/{id}', name: 'reclamation.pdf')]
+    public function generatePdfReclamation(Reclamation $reclamation = null, PdfService $pdf)
+    {
+        $html = $this->renderView('reclamation/detaille_reclamation.html.twig', [
+            'reclamation' => $reclamation
+        ]);   
         $pdf->showPdfFile($html);
-
-
     }
 
     ///find by contact
@@ -189,18 +190,18 @@ class ReclamationController extends AbstractController
 
      $form->handleRequest($request);
      
-     // Check if the reclamation was created more than 24 hours ago
-     if (!$new && $reclamation->getCreatedAt()) {
-         $now = new DateTime();
-         $createdAt = $reclamation->getCreatedAt();
-         $interval = $createdAt->diff($now);
-         if ($interval->days >= 1) {
-             $message = 'You cannot update the reclamation after 24 hours of creation.';
-             return $this->render('reclamation/error.html.twig', [
-                 'message' => $message
-             ]);
-         }
-        }
+ // Check  the reclamation 
+if (!$new && $reclamation->getCreatedAt()) {
+    $now = new DateTime();
+    $createdAt = $reclamation->getCreatedAt();
+    $interval = $createdAt->diff($now);
+    if ($interval->h >= 4) { 
+        $message = 'vous povez pas modifier cette reclamation apres 4 h.';
+        return $this->render('reclamation/error.html.twig', [
+            'message' => $message
+        ]);
+    }
+}
      
      if ($form->isSubmitted() && $form->isValid()) {
          $manager = $doctrine->getManager();
@@ -258,7 +259,7 @@ class ReclamationController extends AbstractController
            
             $reclamation->setDestinataire($destinataire);
             $reclamation->setType($type);
-            $reclamation->setStatus($status);
+         
             $reclamation->setDescription($description);
            
      
@@ -277,23 +278,29 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('listes.reclamations');
     }
 
-
-    /**
-     * @Route("/reclamation/{id}/traiter", name="reclamation_traiter")
-     */
-
+    //traitment reclamation
      #[Route('/{id}/traiter',name:'reclamation_traiter')]
-    public function traiterReclamation(Reclamation $reclamation , ManagerRegistry $Doctrine): Response
-    {
-        $reclamation->setTreated(true);
-        
-        $entityManager=$Doctrine->getManager();
-        $entityManager->persist($reclamation);
-        $entityManager->flush();
-        
-        return $this->redirectToRoute('listes.reclamations', ['id' => $reclamation->getId()]);
-    }
+     public function traiterReclamation(Reclamation $reclamation , ManagerRegistry $Doctrine, MailerInterface  $mailer): Response
+     {
+         $reclamation->setTreated(true);
+     
+         $entityManager=$Doctrine->getManager();
+         $entityManager->persist($reclamation);
+         $entityManager->flush();
+     
+         $email = (new TemplatedEmail())
+         ->from('hassen.messaoudi@esprit.tn')
+         ->to($reclamation->getUser()->getEmail())
+         ->subject('Traitement')
+         ->htmlTemplate('reclamation/email.html.twig');
+         
 
+    $mailer->send($email);
+ 
+         return $this->redirectToRoute('listes.reclamations', ['id' => $reclamation->getId()]);
+     }
+     
+    //untraitement
 
     #[Route('/{id}/untraiter',name:'reclamation_untraiter')]
 
@@ -308,25 +315,9 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('listes.reclamations', ['id' => $reclamation->getId()]);
     }
 
-
-
-
- 
-
  }
-
-
-
-  
-
-
-
-
-
+ 
 // #Route
-
-
-
 
   //#[Route('/reclamation', name: 'app_reclamation')]
    // public function index(): Response
@@ -344,13 +335,6 @@ class ReclamationController extends AbstractController
     //Ajout d'une reclamation
     /**/
         
-
-
-
-
-
-
-
 
 
 
@@ -395,19 +379,6 @@ class ReclamationController extends AbstractController
         
         
     }   */
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

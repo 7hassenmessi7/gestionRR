@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Service;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -9,7 +8,7 @@ use Symfony\Component\Mime\Email;
 class Mailing {
 
 
-    public function __construct(private MailerInterface $mailer)
+    public function __construct(private MailerInterface $mail)
     {
         
     }
@@ -19,17 +18,17 @@ class Mailing {
     ): void
     {
         $email = (new Email())
-            ->from('hassen.messaoudi@esprit.tn')
-            ->to('hassenmessaoudi29@gmail.com')
+            ->from('ahmed.chouchene@esprit.tn')
+            ->to('hassen.messsaoudi@esprit.tn')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!');
+            ->subject('Réclamation!')
+            ->html($content);
             
 
-        $this ->mailer->send($email);
+        $this ->mail->send($email);
 
         // ...
     }

@@ -3,13 +3,13 @@
 
 {% block body %}
 
-{{ form_start(filterForm) }}
-        {{ form_row(filterForm.destinataire, {'label': false}) }}
+   {{ form_start(filterForm) }}
+   {{ form_row(filterForm.destinataire, {'label': false}) }}
         
         
     {{ form_end(filterForm) }}
   
-<div class="row">
+<div class="row"> 
 					<div class="col-md">
 						<div class="card card-body">
 							<table class="table table-sm">
@@ -17,8 +17,10 @@
 									<th>contact</th>
 									<th>destinataire</th>
 									<th>Type</th>
-									<th>Status</th>
+									
     							    <th>description</th>
+									<th>status</th>
+									<th>Action</th>
 								
 									<th>createdAt</th>
 									<th>detail</th>
@@ -37,7 +39,7 @@
 									<td>{{rec.destinataire}}</td>
 									<td>{{rec.Type}}</td>
 								
-									<td>{{rec.status}}</td>
+									
                                     <td>{{rec.description}}</td>
 									 
 									<td>{{ rec.treated ? 'Traité' : 'En cours' }}</td>
@@ -79,7 +81,7 @@
 				 </ul>
 			    </nav>
 				{% endif %}
-
+</div>
 {% endblock %}
 
 

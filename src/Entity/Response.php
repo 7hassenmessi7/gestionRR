@@ -22,7 +22,8 @@ class Response
     //@Gedmo\Timestampable(no="create)
     private $createdAt;
 
-    #[ORM\ManyToOne(inversedBy: 'responses')]
+    #[ORM\ManyToOne(inversedBy: 'responses' )]
+
     private ?Reclamation $reclamation = null;
 
 

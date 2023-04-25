@@ -28,8 +28,7 @@ class Reclamation
     #[ORM\Column(length: 50)]
     private ?string $destinataire = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $status = null;
+    
      
     #[Assert\Length(
         min: 20,
@@ -51,7 +50,8 @@ class Reclamation
     #[ORM\Column]
     private ?bool $treated = false;
 
-    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Response::class)]
+    #[ORM\OneToMany(mappedBy: 'reclamation' ,targetEntity: Response::class,cascade: ['persist'])]
+
     private Collection $responses;
 
     public function __construct()
@@ -94,17 +94,8 @@ class Reclamation
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
+    
+   
 
     public function getDescription(): ?string
     {

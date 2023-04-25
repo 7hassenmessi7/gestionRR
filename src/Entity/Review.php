@@ -183,7 +183,15 @@ class Review
     }
 
    
+    public function __ToString(): string
+    {
+       
+        $this->rate;
+        $this->comment;
+        
+        return $this;
 
+    }
    
 
 }

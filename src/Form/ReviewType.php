@@ -34,7 +34,7 @@ class ReviewType extends AbstractType
             ])
             ->add('comment')
 
-            ->add('ajouter',SubmitType::class)
+            
         ;
     }
 

@@ -1,3 +1,13 @@
+#framework:
+ #   mailer:
+  #      dsn: '%env(MAILER_DSN)%'
+
+
+# config/packages/mailer.yaml
 framework:
     mailer:
-        dsn: '%env(MAILER_DSN)%'
+        dsn: 'gmail+smtp://hassen.messaoudi@esprit.tn:223JMT8092@default'
+
+# Replace "your-gmail-username" and "your-gmail-password" with your actual Gmail username and password. 
+# Alternatively, you can use an environment variable to store your Gmail password for security reasons:
+# dsn: 'gmail+smtp://your-gmail-username:%env(GMAIL_PASSWORD)@default'
